@@ -1,0 +1,90 @@
+#+IMPORTANT:-*- mode: org -*-
+#+title: Cantor Diagonalization
+#+author: Learn About
+#+date: 13 January 2021
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+LATEX_HEADER: \input{\detokenize{~/.spacemacs.d/cse380preamble.tex}}
+#+LATEX: \input{\detokenize{~/.spacemacs.d/cse380headerbox.tex}}
+
+* The Setup                                                        :noexport:
+    file:cantor-diagonalization.html
+* The Table
+\[\begin{array}{ccccccccc}
+ &  {\mathbf 1}  &  {\mathbf 2}  &  {\mathbf 3}  &  {\mathbf 4}  &  {\mathbf 5}  &  .  &  .  &  .\\
+{\mathbf 1}  &  3  &  1  &  4  &  1  &  5  &  .  &  .  &  .\\
+{\mathbf 2}  &  2  &  7  &  1  &  8  &  2  &  .  &  .  &  .\\
+{\mathbf 3}  &  1  &  6  &  1  &  8  &  0  &  .  &  .  &  .\\
+{\mathbf 4}  &  1  &  4  &  1  &  4  &  2  &  .  &  .  &  .\\
+{\mathbf 5}  &  9  &  8  &  1  &  5  &  4  &  .  &  .  &  .\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+\end{array}\]
+
+* The Crux
+  The proof by contradiction depends on one key assumption:
+** The table is
+   \ldquo{}complete\rdquo --- \ldquo{}finished\rdquo --- \ldquo{}full\rdquo.
+
+   In other words, it lacks nothing.
+
+* The Diagonal
+\[\begin{array}{ccccccccc}
+ &  {\mathbf 1}  &  {\mathbf 2}  &  {\mathbf 3}  &  {\mathbf 4}  &  {\mathbf 5}  &  .  &  .  &  .\\
+{\mathbf 1}  &  {\mathbf 3}  &  1  &  4  &  1  &  5  &  .  &  .  &  .\\
+{\mathbf 2}  &  2  &  {\mathbf 7}  &  1  &  8  &  2  &  .  &  .  &  .\\
+{\mathbf 3}  &  1  &  6  &  {\mathbf 1}  &  8  &  0  &  .  &  .  &  .\\
+{\mathbf 4}  &  1  &  4  &  1  &  {\mathbf 4}  &  2  &  .  &  .  &  .\\
+{\mathbf 5}  &  9  &  8  &  1  &  5  &  {\mathbf 4}  &  .  &  .  &  .\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+\end{array}\]
+
+* Old and New
+\[\begin{array}{ccccccccccccccccccccc}
+ &  {\mathbf 1}  &  {\mathbf 2}  &  {\mathbf 3}  &  {\mathbf 4}  &  {\mathbf 5}  &  .  &  .  &  .
+& & & &
+ &  {\mathbf 1}  &  {\mathbf 2}  &  {\mathbf 3}  &  {\mathbf 4}  &  {\mathbf 5}  &  .  &  .  &  .\\
+{\mathbf 1}  &  {\mathbf 3}  &  1  &  4  &  1  &  5  &  .  &  .  &  .
+& & & &
+{\mathbf 1}  &  {\mathbf 4}  &  1  &  4  &  1  &  5  &  .  &  .  &  .\\
+{\mathbf 2}  &  2  &  {\mathbf 7}  &  1  &  8  &  2  &  .  &  .  &  .
+& & & &
+{\mathbf 2}  &  2  &  {\mathbf 4}  &  1  &  8  &  2  &  .  &  .  &  .\\
+{\mathbf 3}  &  1  &  6  &  {\mathbf 1}  &  8  &  0  &  .  &  .  &  .
+& & & &
+{\mathbf 3}  &  1  &  6  &  {\mathbf 4}  &  8  &  0  &  .  &  .  &  .\\
+{\mathbf 4}  &  1  &  4  &  1  &  {\mathbf 4}  &  2  &  .  &  .  &  .
+& & & &
+{\mathbf 4}  &  1  &  4  &  1  &  {\mathbf 5}  &  2  &  .  &  .  &  .\\
+{\mathbf 5}  &  9  &  8  &  1  &  5  &  {\mathbf 4}  &  .  &  .  &  .
+& & & &
+{\mathbf 5}  &  9  &  8  &  1  &  5  &  {\mathbf 5}  &  .  &  .  &  .\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &
+& & & &
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &
+& & & &
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &
+& & & &
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+\end{array}\]
+
+* Characteristic Functions
+  of the Powerset of the Positive Integers:
+
+\[\begin{array}{ccccccccc}
+ &  {\mathbf 1}  &  {\mathbf 2}  &  {\mathbf 3}  &  {\mathbf 4}  &  {\mathbf 5}  &  .  &  .  &  .\\
+{\mathbf 1}  &  {\mathbf 0}  &  1  &  0  &  1  &  0  &  .  &  .  &  .\\
+{\mathbf 2}  &  1  &  {\mathbf 0}  &  1  &  0  &  1  &  .  &  .  &  .\\
+{\mathbf 3}  &  1  &  0  &  {\mathbf 1}  &  1  &  1  &  .  &  .  &  .\\
+{\mathbf 4}  &  0  &  1  &  1  &  {\mathbf 0}  &  1  &  .  &  .  &  .\\
+{\mathbf 5}  &  0  &  0  &  1  &  1  &  {\mathbf 0}  &  .  &  .  &  .\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+.  &  .  &  .  &  .  &  .  &  .  &     &     &\\
+\end{array}\]

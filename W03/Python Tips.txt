@@ -1,0 +1,110 @@
+#+IMPORTANT:-*- mode: org -*-
+#+title: Python Tips
+#+author: Kyle Mueller
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+options: html-postamble:nil
+#+startup: showeverything entitiespretty
+#+setupfile: theme-bigblow.setup
+
+* Tips For Writing Better, More Functional, Python Code
+  This may seem like review for a few of you, but for others, there might be
+  some insights you had never before encountered. Feel free to ask questions or
+  make comments!
+
+** Lambda Functions
+   Lambda functions are awesome! Lambda functions are inline functions or
+   anonymous functions, and can help to make your code shorter!
+
+   I've written an =is_prime= function below using a lambda function. As you can
+   see, since Python treats functions like objects, you can set a variable to a
+   lambda function instead of using def!
+
+#+begin_src python
+is_prime = lambda n:all(n%i for i in range(2,int(n**.5)+1))
+
+return [*map(is_prime, range(2,11))]
+#+end_src
+
+#+results:
+| True | True | False | True | False | True | False | False | False |
+
+** Map
+   As many of you may already know, a map takes a function and maps it across a
+   list.
+
+   In the example below, a function that squares a number is mapped across a
+   range of numbers.
+
+#+begin_src python
+return [*map(lambda x: (x**2), range(1,11))]
+#+end_src
+
+#+results:
+| 1 | 4 | 9 | 16 | 25 | 36 | 49 | 64 | 81 | 100 |
+
+   This example shows how to use a map with a lambda that has multiple
+   arguments:
+
+#+begin_src python
+return [*map(lambda x,y: (x**2)+(y**3), range(1,11), range(2,12))]
+#+end_src
+
+#+results:
+| 9 | 31 | 73 | 141 | 241 | 379 | 561 | 793 | 1081 | 1431 |
+
+** Filter
+   Filter is similar to a map, but it returns a list of equal size or smaller
+   than the starting list. Filter doesn't modify items of your list like map,
+   but it checks each item against a boolean function and only returns the
+   values that return =True= for that boolean function.
+
+   An example of this can be seen below, where a range is filtered to find all
+   even numbers.
+
+#+begin_src python
+return [*filter(lambda x: x%2 == 0, range(1,11))]
+#+end_src
+
+#+results:
+| 2 | 4 | 6 | 8 | 10 |
+
+** Reduce
+   =Reduce= takes a function that takes two arguments and reduces the function
+   across a list.
+
+   This may be difficult to understand at first, but I'll walk you through it.
+
+#+begin_src python
+from functools import reduce
+
+return reduce(lambda x,y: x+y, range(4))
+#+end_src
+
+#+results:
+: 6
+
+   While Python's built-in =sum= function could be used instead of using =reduce=, I
+   wrote this example to illustrate the process of =reduce=.
+
+   We start with 0,1 as our x,y values, returning 0+1 = 1.
+   We take this value and use it for the next x value:
+   x = 1, y = 2, 1+2 = 3
+   Once again, We take this value and use it for the next x value:
+   x = 3, y = 3, 3+3 = 6
+
+   Reduce can be used for many, more complicated applications. However, I've
+   included another simple one below:
+
+#+begin_src python
+from functools import reduce
+
+product = lambda x,y: x*y
+factorial = lambda n: reduce(product, range(1,n+1))
+n_choose_k = lambda n,k: factorial(n)/(factorial(k) * factorial(n-k))
+
+return n_choose_k(7,3)
+#+end_src
+
+#+results:
+: 35.0

@@ -1,0 +1,221 @@
+#+IMPORTANT:-*- mode: org -*-
+#+title: More About Infinity
+#+author: Learn
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+asetupfile: ~/.spacemacs.d/theme-bigblow.setup
+#+LATEX_HEADER: \input{\detokenize{~/.spacemacs.d/cse380preamble.tex}}
+#+LATEX: \input{\detokenize{~/.spacemacs.d/cse380headerbox.tex}}
+
+* Learn About Infinite Sets
+** A Famous Set-Theoretic Paradox?
+   *Russell's paradox*
+*** Which says
+    Let S be the set that contains a set x if the set x does not belong to
+    itself, so that S = {x | x \notin x}.
+**** Contradictory!
+     - Show that the assumption that S is a member of S leads to a
+       contradiction.
+***** Why?
+      - By definition S \in S means S is *not* a member of S.
+****** Paradoxical!
+      - Show that the assumption that S is *not* a member of S leads
+        to a contradiction.
+******* Why?
+        - By definition S \notin S means S \in S.
+*** An Analogy
+    Divide the set of words into two sets:
+**** 1
+     - self-describing words
+***** For example
+      small, polysyllabic, awkwardnessful
+**** 2
+     - NON-self-describing
+***** For example
+      long, monosyllabic, edible
+***** Non-hyphenated names
+      - Call set 1 the autological words.
+      - Call set 2 the heterological words.
+***** The Question
+      Is /heterological/ heterological?
+** Get Technical
+*** Learn how to Compare Set Sizes
+    Let S and T be (finite or infinite) sets.
+
+    Recall that |S| and |T| denote the *cardinality* of S and T, respectively.
+
+    Define |S| = |T| (the cardinalities of S and T are *equal* iff there is a
+    /one-to-one correspondence/ from S to T. (Recall bijection?)
+
+    Define |S| \le |T| (the cardinality of S is *less than or equal to* the
+    cardinality of T) iff there is a one-to-one /function/ from S to T. (Recall injection?)
+
+    If \(|S| \le |T|\) but \(|S| \ne |T|\)
+
+    then \(|S| < |T|\).
+
+    (the cardinality of S is *strictly less* than the cardinality of T).
+***** Also works for \sube
+      - if A \sube B but A \neq B then A \subset B.
+*** Squeeze play
+
+    $$|S| = |T| \leftrightarrow |S| \le |T| \land |T| \le |S|.$$
+
+**** In first-order logic
+     - p \leftrightarrow q \equiv (p \rarr q) \land (p \larr q)
+**** Squeeze Play Example: Legal C Programs
+     - Exactly how many legal C programs are there?
+     - Note: /legal/ does not mean useful, or meaningful, or even /compilable/!
+     - Infinitely many, but how do we show that it is a /countable/ infinity?
+     - Let LCP = {x | x is a string containing a legal C program}.
+     - Let N = {0, 1, 2, 3, \dots } (the set of all natural numbers).
+
+**** What is an injection from N to LCP?
+     - f_1 : N \rightarrow LCP
+***** One of many mappings
+      - 0 \rightarrow  "main(){}"
+      - 1 \rightarrow  "main(){;}"
+      - 2 \rightarrow  "main(){;;}"
+      - \dots
+      - n \rightarrow  "main(){;;; \dots ;}"
+      - \dots
+
+**** What is an injection from LCP to N?
+     - f_2 : LCP \rightarrow N
+
+     f_2 looks at each program in LCP as a bitstring, and returns the equivalent
+        unsigned binary integer (converted to decimal).
+
+     - LCP_0 \rightarrow  1398
+     - LCP_1 \rightarrow  62308
+     - LCP_2 \rightarrow  730129
+     - \dots
+     - LCP_n \rightarrow  987131734445134773
+     - \dots
+
+     - Since by definition, the existence of f_1 guarantees that |N| \leq |LCP|,
+     - and the existence of f_2 guarantees that |LCP| \leq |N|,
+     - it follows that |N| = |LCP|.
+**** QED
+     - Thus, there are as many legal C programs as there are natural numbers.
+*** Ponder me this
+    Does a proper subset always have a smaller cardinality?
+
+    If we deal with finite sets, then S \subset T always implies |S| < |T|.
+
+    But for infinite sets, /this is not necessarily the case!/
+
+    Let E be the set of even natural numbers. How does its cardinality relate
+    to the cardinality of N (the set of all natural numbers)?
+
+    Let f : N \rightarrow E be defined by f(n) = 2n.
+
+    Then f is a one-to-one correspondence, therefore |E| = |N|.
+
+    | N: | 0 | 1 | 2 | 3 | 4 |  5 |  6 |  7 | \dots |
+    | E: | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 14 | \dots |
+
+*** Ponder me this too
+    Do all infinite sets have the same cardinality?
+**** The answer is
+      - *NO!* It would be incredibly uninteresting if they did.
+      - But finding sets of different infinite sizes is another matter.
+
+     It\rsquo{}s fairly easy to see that the cardinality of the positive integers is
+     equal to the cardinality of the positive rationals.
+
+      | 1/1 | 1/2 | 1/3 | 1/4 | ... |
+      | 2/1 | 2/2 | 2/3 | 2/4 | ... |
+      | 3/1 | 3/2 | 3/3 | 3/4 | ... |
+      | .   | .   | .   | .   | ... |
+      | .   | .   | .   | .   | ... |
+
+     It\rsquo{}s a little harder to show that |Z^{+}| = |Q|.
+
+**** However
+      - there /are/ cardinalities strictly greater than |Z^{+}|.
+      - In particular,
+      \[|R| > |Z^{+}|\]
+
+      (there are \ldquo{}more\rdquo real numbers than positive integers)!
+**** Define the difference
+     - Sets that are finite or have the same cardinality as Z^{+} (or N, it doesn't
+       matter) are called *countable*.
+
+     - Countable sets are sets whose elements can be *listed*.
+
+     - e_1, e_2, e_3, \dots, e_n (if the set is finite) or
+
+     - e_1, e_2, e_3, \dots (if the set is infinite).
+
+***** By Contrast
+      Uncountable sets are sets whose elements *CANNOT* be listed.
+
+*** Learn how to Generate Them
+**** Power Setting One
+   |   | 1 | 2 | 3 | 4 | 5 | ... |
+   |---+---+---+---+---+---+-----|
+   | 1 | 0 | 0 | 0 | 0 | 0 | ... |
+   | 2 | 0 | 1 | 0 | 1 | 0 | ... |
+   | 3 | 1 | 0 | 1 | 0 | 1 | ... |
+   | 4 | 0 | 1 | 1 | 0 | 1 | ... |
+   | 5 | 0 | 0 | 1 | 0 | 0 | ... |
+   | . | . | . | . | . | . | ... |
+   | . | . | . | . | . | . | ... |
+   | . | . | . | . | . | . | ... |
+**** Generates the Next
+   |   | 1 | 2 | 3 | 4 | 5 | ... |
+   |---+---+---+---+---+---+-----|
+   | 1 | 1 | 0 | 0 | 0 | 0 | ... |
+   | 2 | 0 | 0 | 0 | 1 | 0 | ... |
+   | 3 | 1 | 0 | 0 | 0 | 1 | ... |
+   | 4 | 0 | 1 | 1 | 1 | 1 | ... |
+   | 5 | 0 | 0 | 1 | 0 | 1 | ... |
+   | . | . | . | . | . | . | ... |
+   | . | . | . | . | . | . | ... |
+   | . | . | . | . | . | . | ... |
+
+* To Summarize
+   - Use N instead of Z^{+}
+   - |P(N)| > |N|
+   - |S| \le |T| if there is a one-to-one /mapping/ between S and T.
+   - |N| \ne |P(N)| must be argued for and proven to conclude |N| < |P(N)|
+   - \aleph_0 (Aleph Null) is the cardinality of the *smallest* infinite set.
+   - $\Zp$
+
+* Inverting a Pairing Function
+
+\[f(m, n) = \frac{(m + n - 2)(m + n - 1)}{2} + m\]
+
+With $y = f(m, n)$ and $x = m + n$,
+
+\[y = \frac{x^2 - 3x + 2}{2} + m.\]
+
+Move $y$ to the other side:
+
+\[0 = \frac{x^2 - 3x + 2}{2} + m - y\]
+
+Multiply both sides by 2:
+
+\[0 = x^2 - 3x + 2 + 2(m - y).\]
+
+Pretend $m$ and $y$ are constants and solve the quadratic equation
+
+\[ax^2 + bx + c = 0\]
+
+with \(a = 1, b = -3, c = 2(m - y + 1)\):
+
+\[x = \frac{3 \pm \sqrt{9 - 8(m - y + 1)}}{2} = \frac{3 \pm \sqrt{8y - 8m + 1}}{2}\]
+
+Taking the positive root and letting $m = 0$ (which it never is, but just pretend!):
+
+\[x = \frac{3+ \sqrt{8y + 1}}{2}\]
+
+Finish by justifying this Python implementation:
+
+: x = ceil((3 + sqrt(8 * y + 1)) / 2) - 1
+
+Or even shorter (thanks Kyle!):
+
+: x = int((3+sqrt(8*y))/2)
